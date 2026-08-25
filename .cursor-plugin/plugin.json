@@ -9,5 +9,6 @@
   "homepage": "https://myne.network",
   "repository": "https://github.com/myne-network/myne-skills-plugin",
   "license": "MIT",
-  "keywords": ["myne", "mcp", "crm", "customers", "brand"]
+  "keywords": ["myne", "mcp", "crm", "customers", "brand"],
+  "logo": "assets/logo.svg"
 }
