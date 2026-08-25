@@ -15,8 +15,10 @@ This plugin does **not** include the in-app HuckAI/Analyst skill library. Skills
 
 ```bash
 mkdir -p ~/.cursor/plugins/local
-ln -sfn /path/to/myne-skills-plugin ~/.cursor/plugins/local/myne
+cp -R /path/to/myne-skills-plugin ~/.cursor/plugins/local/myne
 ```
+
+Cursor rejects symlinks whose target is outside `~/.cursor/plugins/local`. Re-run the `cp` (or use `rsync -a --delete`) after local edits.
 
 Reload Cursor (**Developer: Reload Window**). Open **Customize** and confirm the `myne` plugin loaded. Connect the MCP server and complete OAuth on first use.
 
