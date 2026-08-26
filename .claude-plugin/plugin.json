@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "myne",
+  "description": "Connect to myne User MCP for brand staff: session identity, brand summary, and customer lookup with guided skills.",
+  "version": "0.1.0",
+  "author": {
+    "name": "myne",
+    "url": "https://myne.network"
+  },
+  "homepage": "https://myne.network",
+  "repository": "https://github.com/myne-network/myne-skills-plugin",
+  "license": "MIT"
+}

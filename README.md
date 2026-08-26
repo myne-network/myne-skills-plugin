@@ -1,13 +1,13 @@
 # myne Skills Plugin
 
-Cursor plugin that connects to the public myne **User MCP** and ships skills for brand staff workflows.
+Cursor and Claude Code plugin that connects to the public myne **User MCP** and ships skills for brand staff workflows.
 
 ## What you get
 
 - **MCP:** `https://mcp.myne.network/mcp` (OAuth Bearer for brand staff)
 - **Skills:** session grounding, customer list/search, safety defaults
 
-This plugin does **not** include the in-app HuckAI/Analyst skill library. Skills here only teach agents how to use User MCP tools from Cursor.
+This plugin does **not** include the in-app HuckAI/Analyst skill library. Skills here only teach agents how to use User MCP tools from an MCP host.
 
 ## Install (Cursor)
 
@@ -30,9 +30,24 @@ Reload Cursor (**Developer: Reload Window**). Open **Customize** and confirm the
 
 Or install from [cursor.com/marketplace](https://cursor.com/marketplace).
 
+## Install (Claude Code)
+
+### Local development
+
+```bash
+claude plugin validate /path/to/myne-skills-plugin
+claude --plugin-dir /path/to/myne-skills-plugin
+```
+
+Confirm skills under `/myne:…`. Run `/mcp`, connect **myne**, and complete OAuth on first use (User MCP uses dynamic client registration — no static `clientId` in this plugin).
+
+### Marketplace (when published)
+
+Install from the Claude plugin marketplace when a listing is available (command TBD). Until then, use `--plugin-dir` above.
+
 ## Manual MCP (without plugin)
 
-Equivalent to this plugin’s `mcp.json`:
+Cursor uses `mcp.json`; Claude Code uses `.mcp.json`. Both point at the same endpoint:
 
 ```json
 {
@@ -43,6 +58,8 @@ Equivalent to this plugin’s `mcp.json`:
   }
 }
 ```
+
+Claude’s `.mcp.json` also sets `"type": "http"` on the server entry.
 
 ## Skills
 
@@ -57,13 +74,14 @@ Equivalent to this plugin’s `mcp.json`:
 | Repo | Role |
 | --- | --- |
 | [mcp-user-tools](https://github.com/myne-network/mcp-user-tools) | Hosted User MCP server |
-| This repo | Cursor packaging (manifest, MCP config, skills) |
+| This repo | Cursor + Claude packaging (manifests, MCP config, skills) |
 
 ## Publish checklist
 
-1. Verify OAuth + tools against prod User MCP from a Cursor install of this plugin
-2. Submit at [cursor.com/marketplace/publish](https://cursor.com/marketplace/publish)
-3. Bump `version` in `.cursor-plugin/plugin.json` for each marketplace update
+1. Verify OAuth + tools against prod User MCP from a Cursor and Claude Code install of this plugin
+2. Cursor: submit at [cursor.com/marketplace/publish](https://cursor.com/marketplace/publish)
+3. Claude: publish when ready via Claude’s plugin marketplace process
+4. Bump `version` in `.cursor-plugin/plugin.json` and `.claude-plugin/plugin.json` for each release
 
 ## License
 

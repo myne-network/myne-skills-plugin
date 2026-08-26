@@ -5,7 +5,7 @@ description: "Use for any myne User MCP work involving customer or brand data. R
 
 # myne safety
 
-Guardrails for brand staff using myne User MCP from Cursor.
+Guardrails for brand staff using myne User MCP from an MCP host.
 
 ## Defaults
 

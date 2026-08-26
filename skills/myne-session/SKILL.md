@@ -1,6 +1,6 @@
 ---
 name: myne-session
-description: "Use when starting myne work in Cursor, checking who is authenticated, or confirming which brand the User MCP session is bound to. Covers user_me and brand_summary before customer or other brand-scoped tools."
+description: "Use when starting myne work, checking who is authenticated, or confirming which brand the User MCP session is bound to. Covers user_me and brand_summary before customer or other brand-scoped tools."
 ---
 
 # myne session
@@ -27,7 +27,7 @@ Both require OAuth scope `user.read`. No arguments.
 1. Call `user_me` to confirm the authenticated staff user and brand binding.
 2. Call `brand_summary` when you need brand name or timezone for the reply.
 3. Do **not** invent brand id, brand name, staff identity, or permissions.
-4. If auth fails or tools are missing, tell the user to reconnect User MCP (Customize → MCP / plugin) and complete OAuth — do not guess.
+4. If auth fails or tools are missing, tell the user to reconnect User MCP in their host (plugin / MCP settings) and complete OAuth — do not guess.
 
 ## Response habits
 
