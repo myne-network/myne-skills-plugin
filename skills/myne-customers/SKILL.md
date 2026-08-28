@@ -21,6 +21,7 @@ Prefer establishing session context (`user_me` / `brand_summary`) if brand bindi
 | --- | --- |
 | `customers_list_recent` | Browse recent customers; optional `limit` (1–50) and `cursor` |
 | `customers_search` | Lookup by `customer_ids` and/or `external_ids` (max 25 each) |
+| `customers_get` | Single customer by `customer_id` (masked contact) |
 
 Both require OAuth scope `user.read`. Brand is taken from the session — do not invent a brand id.
 

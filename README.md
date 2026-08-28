@@ -5,7 +5,7 @@ Cursor and Claude Code plugin that connects to the public myne **User MCP** and 
 ## What you get
 
 - **MCP:** `https://mcp.myne.network/mcp` (OAuth Bearer for brand staff)
-- **Skills:** session grounding, customer list/search, safety defaults
+- **Skills:** session grounding, customers, campaigns, automations, drafts, safety defaults
 
 This plugin does **not** include the in-app HuckAI/Analyst skill library. Skills here only teach agents how to use User MCP tools from an MCP host.
 
@@ -66,8 +66,30 @@ Claude’s `.mcp.json` also sets `"type": "http"` on the server entry.
 | Skill | Purpose |
 | --- | --- |
 | `myne-session` | `user_me`, `brand_summary` — identity and brand binding |
-| `myne-customers` | `customers_list_recent`, `customers_search` |
-| `myne-safety` | Read-only default, masking, scopes, no invented PII |
+| `myne-customers` | `customers_list_recent`, `customers_search`, `customers_get` |
+| `myne-campaigns` | Campaign list/get, previews, draft upsert |
+| `myne-automations` | Inactive automation drafts |
+| `myne-drafts` | All `user.draft` write tools and rules |
+| `myne-safety` | Masking, scopes, elicitation, no invented PII |
+
+## Tool matrix (User MCP)
+
+| Tool | Scope | Permission |
+| --- | --- | --- |
+| `user_me`, `brand_summary` | `user.read` | membership |
+| `customers_*` | `user.read` | customers / view |
+| `campaigns_list`, `campaigns_get`, `campaigns_preview_audience` | `user.read` | campaigns / view |
+| `campaigns_preview_content`, `campaigns_draft_upsert` | `user.draft` | campaigns / edit |
+| `automations_draft_upsert` | `user.draft` | automations / edit |
+| `promotions_draft_upsert` | `user.draft` | brand_settings / edit |
+| `journeys_draft_upsert` | `user.draft` | journeys / edit |
+| `messages_preview` | `user.draft` | conversations / edit |
+
+Customer contact fields are **masked** on every egress path. Draft tools never send, schedule, or activate live work.
+
+## Connected apps (in-product)
+
+Staff can review and revoke User MCP grants at **Settings → Integrations → Connected AI** (`/settings/integration/connected-ai`).
 
 ## Related services
 
