@@ -18,7 +18,7 @@ Guardrails for brand staff using myne User MCP from an MCP host.
 
 | Scope | Meaning |
 | --- | --- |
-| `user.read` | Identity, brand summary, customers, campaigns read, previews (audience) |
+| `user.read` | Identity, brand summary, customers, campaigns, automations, journeys, conversations, signals reads; audience previews |
 | `user.draft` | Draft/inactive writes and content/message previews that mutate nothing live |
 
 If a write or draft tool is **not** in the live tool list, do not claim you can create or mutate entities via User MCP. Say what is available instead.

@@ -5,7 +5,7 @@ Cursor and Claude Code plugin that connects to the public myne **User MCP** and 
 ## What you get
 
 - **MCP:** `https://mcp.myne.network/mcp` (OAuth Bearer for brand staff)
-- **Skills:** session grounding, customers, campaigns, automations, drafts, safety defaults
+- **Skills:** session grounding, customers, campaigns, automations, journeys, conversations, signals, drafts, safety defaults
 
 This plugin does **not** include the in-app HuckAI/Analyst skill library. Skills here only teach agents how to use User MCP tools from an MCP host.
 
@@ -68,7 +68,10 @@ Claude’s `.mcp.json` also sets `"type": "http"` on the server entry.
 | `myne-session` | `user_me`, `brand_summary` — identity and brand binding |
 | `myne-customers` | `customers_list_recent`, `customers_search`, `customers_get` |
 | `myne-campaigns` | Campaign list/get, previews, draft upsert |
-| `myne-automations` | Inactive automation drafts |
+| `myne-automations` | Automation list/get + inactive drafts |
+| `myne-journeys` | Journey list/get + draft upsert |
+| `myne-conversations` | Recent threads (names/ids) + message preview |
+| `myne-signals` | Signals dashboard id + name list |
 | `myne-drafts` | All `user.draft` write tools and rules |
 | `myne-safety` | Masking, scopes, elicitation, no invented PII |
 
@@ -80,12 +83,16 @@ Claude’s `.mcp.json` also sets `"type": "http"` on the server entry.
 | `customers_*` | `user.read` | customers / view |
 | `campaigns_list`, `campaigns_get`, `campaigns_preview_audience` | `user.read` | campaigns / view |
 | `campaigns_preview_content`, `campaigns_draft_upsert` | `user.draft` | campaigns / edit |
+| `automations_list`, `automations_get` | `user.read` | automations / view |
 | `automations_draft_upsert` | `user.draft` | automations / edit |
-| `promotions_draft_upsert` | `user.draft` | brand_settings / edit |
+| `journeys_list`, `journeys_get` | `user.read` | journeys / view |
 | `journeys_draft_upsert` | `user.draft` | journeys / edit |
+| `conversations_list_recent` | `user.read` | conversations / view |
 | `messages_preview` | `user.draft` | conversations / edit |
+| `signals_dashboards_list` | `user.read` | signals / view |
+| `promotions_draft_upsert` | `user.draft` | brand_settings / edit |
 
-Customer contact fields are **masked** on every egress path. Draft tools never send, schedule, or activate live work.
+Customer contact fields are **masked** on every egress path. Conversation list tools omit email/phone keys entirely. Draft tools never send, schedule, or activate live work.
 
 ## Connected apps (in-product)
 
