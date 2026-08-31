@@ -25,6 +25,7 @@ If a write or draft tool is **not** in the live tool list, do not claim you can 
 
 When draft tools exist and the session has `user.draft`:
 
+- OAuth **`user.draft`** is opt-in at consent — upgrading from read-only requires explicit re-consent in `/mcp/authorize` (step-up), not a silent scope expansion.
 - MCP **elicitation** must succeed before the write runs — never pass `confirmed=true`.
 - Draft tools create **inactive/draft** records only; send, schedule, and activate happen **in-app**.
 - Use `in_app_url` from responses to hand off for human review.
