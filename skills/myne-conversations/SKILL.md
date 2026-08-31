@@ -20,6 +20,7 @@ Establish session context first if brand binding is unclear.
 | --- | --- | --- |
 | `conversations_list_recent` | Recent threads (names + ids; `message_id` is UUID string) | `user.read` + conversations view |
 | `messages_preview` | Draft reply preview (no send) | `user.draft` + conversations edit |
+| `messages_draft_upsert` | Create/update inbox draft reply (no send) | `user.draft` + conversations edit |
 
 ## Rules
 
@@ -28,4 +29,6 @@ Establish session context first if brand binding is unclear.
 - `message_id` is the latest message UUID in the thread (string), not a numeric id.
 - Do not invent contact details from names.
 - `messages_preview` does **not** send; live send is not available on User MCP in this phase.
+- `messages_draft_upsert` persists a **DRAFT** reply only — optional `messages_preview` before upsert; include `client_request_id` on every write.
+- **One draft per customer per channel** (SMS/EMAIL/INSTAGRAM_DM), not per thread — same as in-app inbox. `thread_id` resolves customer + channel; drafting in another thread for the same customer/channel overwrites the existing draft.
 - Use thread ids from list results; do not invent `thread_id` values.

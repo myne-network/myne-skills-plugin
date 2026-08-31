@@ -88,7 +88,7 @@ Claude’s `.mcp.json` also sets `"type": "http"` on the server entry.
 | `journeys_list`, `journeys_get` | `user.read` | journeys / view |
 | `journeys_draft_upsert` | `user.draft` | journeys / edit |
 | `conversations_list_recent` | `user.read` | conversations / view |
-| `messages_preview` | `user.draft` | conversations / edit |
+| `messages_preview`, `messages_draft_upsert` | `user.draft` | conversations / edit |
 | `signals_dashboards_list` | `user.read` | signals / view |
 | `promotions_draft_upsert` | `user.draft` | brand_settings / edit |
 
