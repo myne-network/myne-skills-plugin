@@ -1,6 +1,6 @@
 ---
 name: myne-drafts
-description: "Use when creating draft/inactive records via User MCP write tools. Covers promotions, journeys, campaigns, and automations. Requires user.draft scope and MCP elicitation."
+description: "Use when creating draft/inactive records via User MCP write tools. Covers promotions, journeys, campaigns, and automations. Requires user.draft scope. Host MCP elicitation is not required for drafts during the interim (OAuth + permissions still apply)."
 ---
 
 # myne drafts
@@ -22,9 +22,10 @@ Preview tools (`campaigns_preview_*`, `messages_preview`) also require `user.dra
 ## Requirements
 
 1. OAuth scope **`user.draft`** on the grant (opt-in at consent).
-2. Host **MCP elicitation** — writes fail closed without it (no `confirmed=true`).
-3. Feature **edit** permission for the domain.
-4. **Must** include **`client_request_id`** on every draft write — retries with the same id return the stored response for one hour (Postgres-backed, cross Lambda instance).
+2. Feature **edit** permission for the domain.
+3. **Must** include **`client_request_id`** on every draft write — retries with the same id return the stored response for one hour (Postgres-backed, cross Lambda instance).
+
+During the interim (until sessionful MCP elicitation ships), draft/preview tools do **not** require host MCP elicitation in Cursor — OAuth `user.draft` and backend inactive-only guards apply instead. **`messages_send`** still requires host elicitation when available.
 
 ## Automation / campaign drafts
 

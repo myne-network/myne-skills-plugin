@@ -27,8 +27,8 @@ If a write, draft, or send tool is **not** in the live tool list, do not claim y
 When draft tools exist and the session has `user.draft`:
 
 - OAuth **`user.draft`** is opt-in at consent — upgrading from read-only requires explicit re-consent in `/mcp/authorize` (step-up), not a silent scope expansion.
-- MCP **elicitation** must succeed before the write runs — never pass `confirmed=true`.
 - Draft tools create **inactive/draft** records only; send, schedule, and activate happen **in-app** unless `user.send` is also granted.
+- **Interim:** host MCP elicitation is **not** required for `user.draft` tools (draft upserts and preview tools) on stateless clients such as Cursor — OAuth scope + permissions + `client_request_id` still apply. Never pass `confirmed=true`.
 
 When `messages_send` exists and the session has `user.send`:
 
@@ -47,6 +47,6 @@ When `messages_send` exists and the session has `user.send`:
 
 - Auth / 401 → ask the user to reconnect the myne plugin MCP and complete OAuth
 - 403 / forbidden → say the session lacks permission; do not retry with guessed args
-- Elicitation required → explain the client must support MCP elicitation or complete the action in-app via `in_app_url`
+- Elicitation required ( **`messages_send` only** during interim) → explain the client must support MCP elicitation for live send, or complete the action in-app via `in_app_url`
 - Empty search → report empty; offer a different id or recent list
 - Unknown tool name → check `tools/list`; do not invent tool names
