@@ -1,6 +1,6 @@
 ---
 name: myne-conversations
-description: "Use when listing recent conversation threads via User MCP, drafting a reply, or sending a drafted reply. Names and ids only on list — no email, phone, or message bodies on list. EMAIL drafts need a staff-confirmed subject before send."
+description: "Use when listing recent conversation threads via User MCP, drafting a reply, or sending a drafted reply. Names and ids only on list — no email, phone, or message bodies on list. Email drafts need a staff-confirmed subject before send."
 ---
 
 # myne conversations
@@ -35,9 +35,9 @@ Establish session context first if brand binding is unclear.
 - **One draft per customer per channel** (SMS/EMAIL/INSTAGRAM_DM), not per thread — same as in-app inbox. `thread_id` resolves customer + channel; drafting in another thread for the same customer/channel overwrites the existing draft.
 - Use thread ids from list results; do not invent `thread_id` values.
 
-## EMAIL subject is a staff decision
+## Email subject is a staff decision
 
-For EMAIL drafts:
+For email drafts:
 
 1. If the user gave a subject, use it. If not, **suggest a short subject** and stop — ask accept / change / cancel before writing the draft.
 2. Call `messages_draft_upsert` with both `body` and the confirmed `subject`.
