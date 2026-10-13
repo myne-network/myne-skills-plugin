@@ -15,7 +15,7 @@ Create or update **draft/inactive** records only.
 | `campaigns_draft_upsert` | campaigns / edit | Draft campaign (conversation send) |
 | `promotions_draft_upsert` | brand_settings / edit | `active: false` only |
 | `journeys_draft_upsert` | journeys / edit | Journey definition, no enrolment |
-| `messages_draft_upsert` | conversations / edit | One draft per customer per channel (not per thread) |
+| `messages_draft_upsert` | conversations / edit | One draft per customer per channel (not per thread); EMAIL drafts need a staff-confirmed `subject` — never copy body into subject |
 
 Preview tools (`campaigns_preview_*`, `messages_preview`) also require `user.draft` where noted.
 

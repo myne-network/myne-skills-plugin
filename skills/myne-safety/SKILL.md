@@ -34,6 +34,7 @@ When `messages_send` exists and the session has `user.send`:
 
 - OAuth **`user.send`** is a separate opt-in — never assume it from `user.draft` alone.
 - Call **`messages_draft_upsert` first** to persist a draft and obtain `draft_id`; preview-only replies cannot be sent.
+- **EMAIL drafts need an explicit subject before send**: suggest one and get staff accept / change / cancel first, then upsert with `body` + `subject` — never copy the body into subject, and never call `messages_send` while the draft preview has `subject: null`. See **myne-conversations** for the full EMAIL workflow.
 - MCP **elicitation** uses live-send copy — confirm the user understands real outbound contact is queued.
 - After send, use `in_app_url` for inbox handoff; do not claim delivery until the app shows sent/queued status.
 

@@ -70,7 +70,7 @@ Claude’s `.mcp.json` also sets `"type": "http"` on the server entry.
 | `myne-campaigns` | Campaign list/get, previews, draft upsert |
 | `myne-automations` | Automation list/get + inactive drafts |
 | `myne-journeys` | Journey list/get + draft upsert |
-| `myne-conversations` | Recent threads (names/ids) + message preview |
+| `myne-conversations` | Recent threads (names/ids), message preview, draft upsert, draft send (EMAIL subject needs staff confirm) |
 | `myne-signals` | Signals dashboard id + name list |
 | `myne-drafts` | All `user.draft` write tools and rules |
 | `myne-safety` | Masking, scopes, elicitation, no invented PII |
@@ -89,6 +89,7 @@ Claude’s `.mcp.json` also sets `"type": "http"` on the server entry.
 | `journeys_draft_upsert` | `user.draft` | journeys / edit |
 | `conversations_list_recent` | `user.read` | conversations / view |
 | `messages_preview`, `messages_draft_upsert` | `user.draft` | conversations / edit |
+| `messages_send` | `user.send` | conversations / edit |
 | `signals_dashboards_list` | `user.read` | signals / view |
 | `promotions_draft_upsert` | `user.draft` | brand_settings / edit |
 
