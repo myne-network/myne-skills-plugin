@@ -27,7 +27,7 @@ Establish session context first if brand binding is unclear.
 ## Rules
 
 - List returns **names and ids only** — never email, phone, addresses, or message bodies.
-- `type` is the message type (e.g. SMS/EMAIL); `channel` is the inbox channel (e.g. personal/shared), not a duplicate of `type`. These values are internal codes — when writing to the user say email / Instagram DM, never echo the raw code (e.g. don't write "an EMAIL thread").
+- `type` is the message type code (e.g. SMS/EMAIL) and `type_label` is its display name — write `type_label` to the user, not the code; `channel` is the inbox channel (e.g. personal/shared), not a duplicate of `type`.
 - `message_id` is the latest message UUID in the thread (string), not a numeric id.
 - Do not invent contact details from names.
 - `messages_preview` does **not** send; only `messages_send` queues live contact, and it requires `user.send` plus a draft created by `messages_draft_upsert`.
