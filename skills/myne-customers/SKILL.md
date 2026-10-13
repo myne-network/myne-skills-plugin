@@ -1,6 +1,6 @@
 ---
 name: myne-customers
-description: "Use when listing or finding customers for the bound myne brand via User MCP. Covers customers_list_recent vs customers_search, pagination, limits, and masked contact fields."
+description: "Use when listing or finding customers for the bound myne brand via User MCP, reading a customer's recent activity, or reading the brand's loyalty program configuration. Covers customers_list_recent vs customers_search, customers_get, customers_events, loyalty_program_summary, pagination, limits, and masked contact fields."
 ---
 
 # myne customers
@@ -11,6 +11,8 @@ Look up customers on the brand bound to the User MCP session.
 
 - “Show recent customers”
 - “Find customer by id / external id”
+- “What has this customer been doing lately?” (recent activity)
+- “What is the brand's loyalty program?” (provider names, points label, tiers)
 - Gathering a small customer set before summarizing activity
 
 Prefer establishing session context (`user_me` / `brand_summary`) if brand binding is unclear.
@@ -22,8 +24,10 @@ Prefer establishing session context (`user_me` / `brand_summary`) if brand bindi
 | `customers_list_recent` | Browse recent customers; optional `limit` (1–50) and `cursor` |
 | `customers_search` | Lookup by `customer_ids` and/or `external_ids` (max 25 each) |
 | `customers_get` | Single customer by `customer_id` (masked contact) |
+| `customers_events` | Recent activity for one customer (`customer_id`; optional `limit` 1–50) — transactions, events, messages as summary rows |
+| `loyalty_program_summary` | Brand loyalty config: active points/cashback providers, points label, reward tier names (config only) |
 
-Both require OAuth scope `user.read`. Brand is taken from the session — do not invent a brand id.
+All require OAuth scope `user.read`. Brand is taken from the session — do not invent a brand id.
 
 ## Strategy
 
@@ -35,6 +39,8 @@ Both require OAuth scope `user.read`. Brand is taken from the session — do not
 
 - Contact fields from User MCP are **masked** (email/phone). Treat them as redacted; do not “unmask” or invent full values.
 - Safe fields typically include id, names, masked email/phone, `last_activity_at`, `created_at`.
+- `customers_events` returns summary rows only (type, timestamp, source, location, amount, event name, direction) — no payment details, addresses, or message bodies. For what a customer said, use the conversations skill's `conversations_get`.
+- `loyalty_program_summary` is configuration only (providers, points label, tier names) — never customer balances or credentials.
 - Do not claim access to raw contact data, full CRM history, or tools that are not in the live `tools/list` for this session.
 
 ## Common pitfalls

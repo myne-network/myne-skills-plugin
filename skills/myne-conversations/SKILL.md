@@ -1,6 +1,6 @@
 ---
 name: myne-conversations
-description: "Use when listing recent conversation threads via User MCP, drafting a reply, or sending a drafted reply. Names and ids only on list — no email, phone, or message bodies on list. Email drafts need a staff-confirmed subject before send."
+description: "Use when reading conversation threads via User MCP: listing recent threads or reading a thread's messages, drafting a reply, or sending a drafted reply. Names and ids only on list — no email or phone. Thread reads expose capped message bodies but never addresses or numbers. Email drafts need a staff-confirmed subject before send."
 ---
 
 # myne conversations
@@ -10,6 +10,7 @@ Recent inbox threads, draft reply previews, and draft sends on the bound brand.
 ## When to use
 
 - “What conversations are recent?”
+- “What did the customer say in that thread?”
 - Preview a draft reply before the user sends in-app
 - Draft and send an inbox reply when the user asks
 
@@ -20,13 +21,15 @@ Establish session context first if brand binding is unclear.
 | Tool | When | Scope |
 | --- | --- | --- |
 | `conversations_list_recent` | Recent threads (names + ids; `message_id` is UUID string) | `user.read` + conversations view |
+| `conversations_get` | Messages in one thread (`thread_id`; bodies capped, oldest-first per page, `cursor` for older pages) | `user.read` + conversations view |
 | `messages_preview` | Draft reply preview (no send) | `user.draft` + conversations edit |
 | `messages_draft_upsert` | Create/update inbox draft reply (no send) | `user.draft` + conversations edit |
 | `messages_send` | Queue a persisted draft for live send (needs `draft_id`) | `user.send` + conversations edit |
 
 ## Rules
 
-- List returns **names and ids only** — never email, phone, addresses, or message bodies.
+- List returns **names and ids only** — never email, phone, or addresses. Reading message content is what `conversations_get` is for.
+- `conversations_get` message rows expose capped `body` (and `subject` for email) plus `direction`, sender/recipient **names**, `type`/`type_label`, and `created_at` — never addresses or phone numbers. Pages are oldest-first; pass the returned `cursor` to page further back.
 - `type` is the message type code (e.g. SMS/EMAIL) and `type_label` is its display name — write `type_label` to the user, not the code; `channel` is the inbox channel (e.g. personal/shared), not a duplicate of `type`.
 - `message_id` is the latest message UUID in the thread (string), not a numeric id.
 - Do not invent contact details from names.

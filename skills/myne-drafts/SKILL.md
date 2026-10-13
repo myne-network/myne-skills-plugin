@@ -19,6 +19,15 @@ Create or update **draft/inactive** records only.
 
 Preview tools (`campaigns_preview_*`, `messages_preview`) also require `user.draft` where noted.
 
+## Read before you write
+
+Promotions are readable back with `user.read` + brand_settings edit permission:
+
+- `promotions_list` — paginated promotion summaries (`limit`, `page`, optional `active` boolean filter)
+- `promotions_get` — one promotion by `promotion_id`, including its normalized `rules`
+
+Use them to verify what a draft wrote or to load an existing promotion before iterating on it with `promotions_draft_upsert`.
+
 ## Requirements
 
 1. OAuth scope **`user.draft`** on the grant (opt-in at consent).
